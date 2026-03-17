@@ -8,6 +8,7 @@ from utils.visualization import (
     get_history_city_pie_data, get_city_list,
     get_all_db_data, fuzzy_match_data, get_data_by_id, insert_history_record
 )
+from utils.model_utils import extract_numeric_value, add_nonlinear_features
 from utils.config import RF_MODEL_PATH, LGBM_MODEL_PATH, ENCODING_MAPS_PATH
 from extensions import db
 from utils.visualization import clear_chart_cache
