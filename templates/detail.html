@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ community_info.community_name }} - 详情页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+                    <div class="position-relative">
+                        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+                        <button type="submit" style="display: block;border: 0;background-color: transparent">
+                            <span class="mdi mdi-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logOut"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+
+            <!-- Page-Title -->
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">{{ community_info.community_name }}</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/page/home">首页</a></li>
+                                <li class="breadcrumb-item active">{{ community_info.community_name }} - 详情页</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="float-right d-none d-md-block">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-0">
+                                <div class="card-body">
+                                    <p style="font-size: 24px; color: black">
+                                        {{ community_info.community_name }}
+                                    </p>
+                                    <p>
+                                        {{ community_info.city }} / {{ community_info.address }}
+                                    </p>
+                                    <p>
+                                        价格: {{ community_info.price }}
+                                    </p>
+                                    <p>
+                                        所属商圈: {{ community_info.business_district }}
+                                    </p>
+                                    <p>
+                                        权属类型: {{ community_info.ownership_type }}
+                                        / {{ community_info.building_type }}
+                                    </p>
+                                    <p>
+                                        物业公司: {{ community_info.property_company }}
+                                    </p>
+                                    <p>
+                                        开发商: {{ community_info.developer }}
+                                    </p>
+                                    <p>
+                                        物业费: {{ community_info.property_fee }}
+                                    </p>
+                                    <p>
+                                        停车费: {{ community_info.parking_fee }}
+                                    </p>
+                                    <a href="{{ community_info.community_link }}" id="details">原网站</a>
+                                    <span id="details">总户数: {{ community_info.total_households }}</span>
+                                    <span id="details">绿化率: {{ community_info.greening_rate }}</span>
+                                    <span id="details">产权: {{ community_info.property_right_years }}</span>
+                                    <span id="details">统一供暖: {{ community_info.unified_heating }}</span>
+                                    <span id="details">供水供电: {{ community_info.water_supply_power }}</span>
+                                    <span id="details">停车位: {{ community_info.parking_spaces }}</span>
+
+                                    <style>
+                                        #details {
+                                            display: inline-block;
+                                            height: 30px;
+                                            margin-right: 10px;
+                                            padding: 0 12px;
+                                            line-height: 30px;
+                                            font-size: 12px;
+                                            color: #849aee;
+                                            background: rgba(132, 154, 174, .1);
+                                        }
+                                    </style>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        2026 @ 蔡宣旭
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            房屋预测分析系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

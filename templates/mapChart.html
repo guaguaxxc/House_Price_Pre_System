@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>房屋地域分析</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+                    <div class="position-relative">
+                        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+                        <button type="submit" style="display: block;border: 0;background-color: transparent">
+                            <span class="mdi mdi-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logOut"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+
+        <div class="page-content">
+
+            <!-- Page-Title -->
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">地域分析</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/page/home">数据可视化</a></li>
+                                <li class="breadcrumb-item active">房屋地域分析</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">全国房价情况</h4>
+                                    <div id="mainOne" style="width: 100%; height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">全国售房情况</h4>
+                                    <div id="mainTwo" style="width: 100%; height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">全国在售/在租情况</h4>
+                                    <div id="mainThree" style="width: 100%; height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        2026 @ 蔡宣旭
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            房屋预测分析系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- 1. 引入ECharts核心库 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 2. 引入ECharts中国地图库 -->
+<script src="/static/china.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/js/dataTables.buttons.min.js"></script>
+<script src="/static/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/js/jszip.min.js"></script>
+<script src="/static/js/buttons.html5.min.js"></script>
+<script src="/static/js/buttons.print.min.js"></script>
+<script src="/static/js/buttons.colVis.min.js"></script>
+<script src="/static/js/dataTables.responsive.min.js"></script>
+<script src="/static/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/js/datatables.init.js"></script>
+<script src="/static/js/app.js"></script>
+<!-- 1. 区域热力图 -->
+<script>
+    // ========== 1. 初始化地图实例（复用你的风格） ==========
+    var priceChart = echarts.init(document.getElementById('mainOne'));
+    var saleChart = echarts.init(document.getElementById('mainTwo'));
+
+    // ========== 2. 绑定后端统计数据（替换为你的模板渲染） ==========
+    var provincePriceData = {{ province_price_data|tojson }}; // 各省平均房价
+    var provinceSaleData = {{ province_sale_data|tojson }};   // 各省在售房源总数
+
+    // ========== 3. 通用地图配置函数（复用逻辑） ==========
+    function initMapOption(title, data, unit, colorRange) {
+        return {
+            tooltip: {
+                trigger: 'item',
+                formatter: function (params) {
+                    return `${params.name}<br/>${title}：${params.value} ${unit}`;
+                }
+            },
+            // 颜色深浅映射数值大小
+            visualMap: {
+                min: Math.min(...data.map(item => item.value) || [0]),
+                max: Math.max(...data.map(item => item.value) || [100]),
+                left: 'bottom',
+                top: 'bottom',
+                text: ['高', '低'],
+                inRange: {color: colorRange},
+                calculable: true // 允许拖拽调整范围
+            },
+            series: [{
+                name: title,
+                type: 'map',
+                mapType: 'china', // 中国省级地图
+                roam: true, // 支持缩放/拖拽
+                label: {
+                    show: true, // 显示省份名称
+                    fontSize: 11
+                },
+                emphasis: {
+                    label: {color: '#fff'},
+                    itemStyle: {areaColor: '#ff4500'} // 悬浮高亮色
+                },
+                data: data
+            }]
+        };
+    }
+
+    // ========== 4. 配置并渲染双地图 ==========
+    // ① 各省平均房价地图（红渐变：浅→深=房价低→高）
+    var priceOption = initMapOption(
+        '平均房价',
+        provincePriceData,
+        '元/㎡',
+        ['#fff5e6', '#ffcc99', '#ff9966', '#ff6633', '#e64a19']
+    );
+    // ② 各省在售房源总数地图（绿渐变：浅→深=数量少→多）
+    var saleOption = initMapOption(
+        '在售房源总数',
+        provinceSaleData,
+        '套',
+        ['#e6f7e6', '#b3e0b3', '#80cc80', '#4dba4d', '#2e8b57']
+    );
+
+    // 渲染地图（复用你的判断逻辑）
+    priceOption && priceChart.setOption(priceOption);
+    saleOption && saleChart.setOption(saleOption);
+
+    // ========== 5. 窗口自适应 ==========
+    window.addEventListener('resize', function () {
+        priceChart.resize();
+        saleChart.resize();
+    });
+</script>
+<!-- 2. 在售/在租双柱状图 -->
+<script>
+    // ========== 1. 初始化图表实例 ==========
+    var chartDom = document.getElementById('mainThree');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    // ========== 2. 绑定后端统计数据（替换为模板变量） ==========
+    var regions = {{ regions|tojson }};       // 七大区域：["东北","华北",...]
+    var saleData = {{ sale_data|tojson }};   // 在售房源总数
+    var rentData = {{ rent_data|tojson }};   // 在租房源总数
+
+    // ========== 3. 双轴柱状图配置 ==========
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' }, // 鼠标悬浮显示阴影提示
+            formatter: function(params) {
+                // 自定义tooltip格式：区域 + 在售 + 在租
+                let region = params[0].name;
+                let sale = params[0].value;
+                let rent = params[1].value;
+                return `${region}<br/>在售房源：${sale} 套<br/>在租房源：${rent} 套`;
+            }
+        },
+        legend: {
+            data: ['在售房源', '在租房源'],
+            top: 30 // 图例位置
+        },
+        grid: {
+            left: '5%',
+            right: '10%', // 给右Y轴留空间
+            bottom: '8%',
+            top: '15%',
+            containLabel: true
+        },
+        // X轴：七大区域
+        xAxis: {
+            type: 'category',
+            data: regions,
+            axisLabel: { fontSize: 12 }
+        },
+        // 双Y轴配置
+        yAxis: [
+            {
+                // 左Y轴：在售房源
+                type: 'value',
+                name: '在售房源（套）',
+                nameTextStyle: { color: '#5470c6' },
+                axisLine: { lineStyle: { color: '#5470c6' } },
+                axisLabel: {
+                    formatter: '{value}',
+                    color: '#5470c6'
+                }
+            },
+            {
+                // 右Y轴：在租房源
+                type: 'value',
+                name: '在租房源（套）',
+                nameTextStyle: { color: '#ee6666' },
+                axisLine: { lineStyle: { color: '#ee6666' } },
+                axisLabel: {
+                    formatter: '{value}',
+                    color: '#ee6666'
+                },
+                // 与左Y轴分离，显示在右侧
+                position: 'right',
+                offset: 0 // 偏移量
+            }
+        ],
+        // 系列数据：双柱状图
+        series: [
+            {
+                name: '在售房源',
+                type: 'bar',
+                yAxisIndex: 0, // 绑定左Y轴
+                data: saleData,
+                itemStyle: { color: '#5470c6' }, // 蓝色系
+                barWidth: '40%' // 柱子宽度
+            },
+            {
+                name: '在租房源',
+                type: 'bar',
+                yAxisIndex: 1, // 绑定右Y轴
+                data: rentData,
+                itemStyle: { color: '#ee6666' }, // 红色系
+                barWidth: '40%'
+            }
+        ]
+    };
+
+    // ========== 4. 渲染图表 + 自适应 ==========
+    option && myChart.setOption(option);
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+</script>
+</body>
+</html>

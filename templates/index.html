@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+                    <div class="position-relative">
+                        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+                        <button type="submit" style="display: block;border: 0;background-color: transparent">
+                            <span class="mdi mdi-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logout"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">系统首页</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item active">欢迎来到房屋分析预测系统</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5>欢迎回来！</h5>
+                                            <p class="text-muted">{{ username }}总预测 {{ predict_count }} 个</p>
+                                            <div class="mt-4">
+                                                <a href="/page/pricePre" class="btn btn-primary btn-sm">开始预测 <i
+                                                        class="mdi mdi-arrow-right ml-1"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-5 ml-auto">
+                                            <div>
+                                                <img src="/static/picture/widget-img.png" alt="" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="header-title mb-4">预测统计</h5>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p class="text-muted mb-2">预测最贵房价</p>
+                                            <h5>{{ max_price[0] }} 元/m²</h5>
+                                        </div>
+                                        <div id="pie" style="width: 200px;height: 70px">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p class="text-muted">最多城市预测</p>
+                                            <h5 class="mb-0"> {{ most_frequent_city[0] }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="header-title mb-4">全国小区单价 TOP 10</h5>
+                                    <div id="price_chart_container"></div>
+                                    <style>
+                                        #price_chart_container {
+                                            width: 100%;
+                                            height: 300px;
+                                            margin: 20px auto; /* 居中显示 */
+                                            border: 1px solid #eee;
+                                            border-radius: 8px;
+                                            padding: 10px;
+                                        }
+                                    </style>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header bg-transparent p-3">
+                                    <h5 class="header-title mb-0">数据标签</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="media my-2">
+
+                                            <div class="media-body">
+                                                <p class="text-muted mb-2">数据总量</p>
+                                                <h5 class="mb-0">{{ summary_data["total_count"] }} 条</h5>
+                                            </div>
+                                            <div class="icons-lg ml-2 align-self-center">
+                                                <i class="uim uim-layer-group"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="media my-2">
+                                            <div class="media-body">
+                                                <p class="text-muted mb-2">在售价格最高</p>
+                                                <h5 class="mb-0">{{ summary_data["max_price"] }} 元/m²</h5>
+                                            </div>
+                                            <div class="icons-lg ml-2 align-self-center">
+                                                <i class="uim uim-analytics"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="media my-2">
+                                            <div class="media-body">
+                                                <p class="text-muted mb-2">物业、建筑类型组合</p>
+                                                <h5 class="mb-0">{{ summary_data["property_type_count"] }} 种</h5>
+                                            </div>
+                                            <div class="icons-lg ml-2 align-self-center">
+                                                <i class="uim uim-ruler"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="media my-2">
+                                            <div class="media-body">
+                                                <p class="text-muted mb-2">平均在售房源</p>
+                                                <h5 class="mb-0">{{ summary_data["avg_sale_houses"] }} 套</h5>
+                                            </div>
+                                            <div class="icons-lg ml-2 align-self-center">
+                                                <i class="uim uim-box"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="header-title mb-4">各城市在售房源个数 TOP 10</h5>
+                                    <div id="city_sale_radar"
+                                         style="width: 100%; height: 315px; margin: 20px auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="header-title">小区地址词云图</h5>
+                                    <div id="address_wordcloud"
+                                         style="width: 100%; height: 320px; margin: 20px auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="header-title mb-4">预测结果统计</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-centered table-hover mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">城市</th>
+                                                <th scope="col">预测价格</th>
+                                                <th scope="col">用户名</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in history_data %}
+                                                <tr>
+                                                    <th scope="row">
+                                                        <a href="#">{{ i.id }}</a>
+                                                    </th>
+                                                    <td>{{ i.city }}</td>
+                                                    <td>
+                                                        <div class="badge badge-soft-danger">{{ i.price }}</div>
+                                                    </td>
+                                                    <td>
+                                                        {{ username }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        2026 @ 蔡宣旭
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            房屋预测分析系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- 引入 ECharts 和词云扩展 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://unpkg.com/echarts-wordcloud@2.0.0/dist/echarts-wordcloud.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/datepicker.min.js"></script>
+<script src="/static/js/datepicker.en.js"></script>
+<script src="/static/js/apexcharts.min.js"></script>
+<script src="/static/js/jquery.knob.min.js"></script>
+<script src="/static/js/jquery.vmap.min.js"></script>
+<script src="/static/js/jquery.vmap.usa.js"></script>
+<!-- 注释掉可能报错的 dashboard.init.js（如有需要可取消注释，但会引发额外错误） -->
+<!-- <script src="/static/js/dashboard.init.js"></script> -->
+<script src="/static/js/app.js"></script>
+
+<!-- 价格柱状图 -->
+<script>
+    const priceChartData = {{ price_chart_data|tojson }};
+    if (!priceChartData || !priceChartData.xAxis || !priceChartData.series || priceChartData.xAxis.length === 0) {
+        console.warn('价格柱状图数据为空，跳过渲染');
+        document.getElementById('price_chart_container').innerHTML = '<div style="text-align: center; line-height: 300px; color: #999;">暂无数据</div>';
+    } else {
+        const chartDom = document.getElementById('price_chart_container');
+        const myChart = echarts.init(chartDom);
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {type: 'shadow'},
+                formatter: (params) => {
+                    const [city, commName] = params[0].name.split("-");
+                    return `${commName}<br/>城市：${city}<br/>单价：${params[0].value} 元/m²`;
+                }
+            },
+            grid: {left: '0.5%', right: '0.5%', bottom: '0.5%', containLabel: true},
+            xAxis: {
+                type: 'category',
+                data: priceChartData.xAxis,
+                axisLabel: {rotate: 45, fontSize: 12, color: '#666', interval: 0},
+                axisLine: {lineStyle: {color: '#ddd'}}
+            },
+            yAxis: {
+                type: 'value',
+                name: '元/m²',
+                nameTextStyle: {color: '#666', fontSize: 12},
+                axisLabel: {color: '#666'},
+                axisLine: {lineStyle: {color: '#ddd'}},
+                splitLine: {lineStyle: {color: '#f5f5f5'}}
+            },
+            series: [{
+                name: '小区单价',
+                type: 'bar',
+                data: priceChartData.series,
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {offset: 0, color: '#60A5FA'},
+                        {offset: 0.6, color: '#0351D3'},
+                        {offset: 1, color: '#023EAA'}
+                    ]),
+                    borderRadius: 3,
+                    shadowColor: 'rgba(3, 81, 211, 0.2)',
+                    shadowBlur: 8,
+                    shadowOffsetY: 2
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    fontSize: 10,
+                    color: '#0351D3',
+                    fontWeight: 500,
+                    formatter: '{c}元'
+                },
+                barWidth: '50%'
+            }]
+        };
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize());
+    }
+</script>
+
+<!-- 雷达图（修正变量名为 radar_sale_data） -->
+<script>
+    const radarData = {{ radar_sale_data|default({"indicator": [], "data": [], "status": "success"})|tojson }};
+    if (!radarData || !radarData.indicator || radarData.indicator.length === 0) {
+        console.warn('雷达图数据为空，跳过渲染');
+        document.getElementById('city_sale_radar').innerHTML = '<div style="text-align: center; line-height: 315px; color: #999;">暂无数据</div>';
+    } else {
+        let top10List = [];
+        radarData.indicator.forEach((item, index) => {
+            const city = item.name.trim();
+            const num = radarData.data[index] || 0;
+            top10List.push(`${city}：${num} 套`);
+        });
+        const maxSale = Math.max(...radarData.data) || 1000;
+        const radarChart = echarts.init(document.getElementById('city_sale_radar'));
+        const radarOption = {
+            tooltip: {
+                trigger: 'item',
+                show: true,
+                borderRadius: 8,
+                padding: 15,
+                formatter: function () {
+                    return `<div style="text-align: left;"><div style="line-height: 1.8;">${top10List.join('<br/>')}</div></div>`;
+                }
+            },
+            radar: {
+                radius: ['20%', '80%'],
+                indicator: radarData.indicator,
+                axisName: {color: '#0351D3', fontSize: 12}
+            },
+            series: [{
+                name: '在售房源数',
+                type: 'radar',
+                data: [{value: radarData.data, name: 'TOP10城市'}],
+                lineStyle: {color: '#0351D3', width: 2},
+                areaStyle: {color: 'rgba(3, 81, 211, 0.15)'},
+                symbol: 'circle',
+                symbolSize: 6
+            }]
+        };
+        radarChart.setOption(radarOption, true);
+        window.addEventListener('resize', () => radarChart.resize());
+    }
+</script>
+
+<!-- 词云图（修正变量名为 wordcloud_data） -->
+<script>
+    const wordcloudData = {{ wordcloud_data|default({"words": [], "status": "success"})|tojson }};
+    if (!wordcloudData || !wordcloudData.words || wordcloudData.words.length === 0) {
+        console.warn('词云数据为空，跳过渲染');
+        document.getElementById('address_wordcloud').innerHTML = '<div style="text-align: center; line-height: 320px; color: #999;">暂无数据</div>';
+    } else {
+        const wordcloudChart = echarts.init(document.getElementById('address_wordcloud'));
+        const wordcloudOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: (params) => `${params.name}<br/>出现次数：${params.value} 次`
+            },
+            series: [{
+                type: 'wordCloud',
+                shape: 'circle',
+                radius: ['20%', '80%'],
+                left: 'center',
+                top: 'center',
+                sizeRange: [12, 60],
+                rotationRange: [-90, 90],
+                gridSize: 8,
+                layoutAnimation: true,
+                textStyle: {
+                    fontFamily: '微软雅黑, Arial',
+                    fontWeight: 'bold',
+                    color: function () {
+                        const hue = 260;
+                        return `hsl(${hue}, ${70 + Math.random() * 20}%, ${30 + Math.random() * 30}%)`;
+                    }
+                },
+                emphasis: {
+                    textStyle: {color: '#3A2B8C', shadowBlur: 10, shadowColor: '#999'}
+                },
+                data: wordcloudData.words
+            }]
+        };
+        wordcloudChart.setOption(wordcloudOption);
+        window.addEventListener('resize', () => wordcloudChart.resize());
+    }
+</script>
+
+<!-- 饼图（保持不变，但添加空数据保护） -->
+<script>
+    var chartDom = document.getElementById('pie');
+    if (!chartDom) console.warn('饼图容器未找到');
+    else {
+        var myChart = echarts.init(chartDom);
+        var pieData = {{ city_pie_data[0] | tojson }};
+        if (!pieData || pieData.length === 0) {
+            myChart.setOption({
+                title: {text: '暂无数据', left: 'center', top: 'center', textStyle: {color: '#999'}}
+            });
+        } else {
+            var option = {
+                tooltip: {trigger: 'item'},
+                series: [{
+                    name: '城市预测个数',
+                    type: 'pie',
+                    radius: '50%',
+                    data: pieData,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+            myChart.setOption(option);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>相关词云</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+    <div class="position-relative">
+        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+        <button type="submit" style="display: block;border: 0;background-color: transparent">
+            <span class="mdi mdi-magnify"></span>
+        </button>
+    </div>
+</form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logOut"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+
+        <div class="page-content">
+
+            <!-- Page-Title -->
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">相关词云</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/page/home">数据可视化</a></li>
+                                <li class="breadcrumb-item active">词云图</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">小区名称词云图</h4>
+                                    <div id="mainOne" style="width: 100%; height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">物业公司词云图</h4>
+                                    <div id="mainTwo" style="width: 100%; height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        2026 @ 蔡宣旭
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            房屋预测分析系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="/static/china.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts-wordcloud/2.1.0/echarts-wordcloud.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/js/dataTables.buttons.min.js"></script>
+<script src="/static/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/js/jszip.min.js"></script>
+<script src="/static/js/buttons.html5.min.js"></script>
+<script src="/static/js/buttons.print.min.js"></script>
+<script src="/static/js/buttons.colVis.min.js"></script>
+<script src="/static/js/dataTables.responsive.min.js"></script>
+<script src="/static/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/js/datatables.init.js"></script>
+<script src="/static/js/app.js"></script>
+<script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function () {
+        // ========== 1. 校验容器是否存在 ==========
+        const commDom = document.getElementById('mainOne');
+        const propertyDom = document.getElementById('mainTwo');
+        if (!commDom || !propertyDom) {
+            console.error('词云容器未找到！');
+            return;
+        }
+
+        // ========== 2. 绑定后端词云数据（替换为模板变量） ==========
+        const commWordData = {{ comm_wordcloud|tojson }} || []; // 小区名数据
+        const propertyWordData = {{ property_wordcloud|tojson }} || []; // 物业公司数据
+
+        // ========== 3. 通用词云配置函数 ==========
+        function getWordcloudOptionOne(data) {
+            return {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: (params) => `${params.name}：出现${params.value}次`
+                },
+                series: [{
+                    type: 'wordCloud', // 词云类型
+                    gridSize: 5, // 词之间的间距
+                    sizeRange: [12, 50], // 词大小范围（px）
+                    rotationRange: [-45, 45], // 旋转角度范围
+                    rotationStep: 45, // 旋转步长
+                    shape: 'triangle', // 词云形状（circle/rect/triangle等）
+                    width: '100%', // 词云宽度
+                    height: '100%', // 词云高度
+                    drawOutOfBound: false, // 不绘制到容器外
+                    textStyle: {
+                        fontFamily: 'Microsoft YaHei', // 适配中文显示
+                        fontWeight: 'bold',
+                        // 随机颜色（区分不同词）
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        }
+                    },
+                    emphasis: {
+                        textStyle: {
+                            color: '#fff', // 悬浮时文字白色
+                            shadowBlur: 10, // 悬浮阴影
+                            shadowColor: '#000'
+                        }
+                    },
+                    data: data // 词云数据
+                }]
+            };
+        }
+
+        function getWordcloudOptionTwo(data) {
+            return {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: (params) => `${params.name}：出现${params.value}次`
+                },
+                series: [{
+                    type: 'wordCloud', // 词云类型
+                    gridSize: 5, // 词之间的间距
+                    sizeRange: [12, 50], // 词大小范围（px）
+                    rotationRange: [-45, 45], // 旋转角度范围
+                    rotationStep: 45, // 旋转步长
+                    shape: 'rect', // 词云形状（circle/rect/triangle等）
+                    width: '100%', // 词云宽度
+                    height: '100%', // 词云高度
+                    drawOutOfBound: false, // 不绘制到容器外
+                    textStyle: {
+                        fontFamily: 'Microsoft YaHei', // 适配中文显示
+                        fontWeight: 'bold',
+                        // 随机颜色（区分不同词）
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        }
+                    },
+                    emphasis: {
+                        textStyle: {
+                            color: '#fff', // 悬浮时文字白色
+                            shadowBlur: 10, // 悬浮阴影
+                            shadowColor: '#000'
+                        }
+                    },
+                    data: data // 词云数据
+                }]
+            };
+        }
+
+        // ========== 4. 初始化并渲染双词云 ==========
+        // 小区名词云
+        const commChart = echarts.init(commDom);
+        commChart.setOption(getWordcloudOptionOne(commWordData));
+
+        // 物业公司词云
+        const propertyChart = echarts.init(propertyDom);
+        propertyChart.setOption(getWordcloudOptionTwo(propertyWordData));
+
+        // ========== 5. 窗口自适应 ==========
+        window.addEventListener('resize', function () {
+            commChart.resize();
+            propertyChart.resize();
+        });
+    });
+</script>
+</body>
+</html>

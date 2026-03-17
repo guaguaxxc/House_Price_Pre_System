@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>房屋价格预测</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+                    <div class="position-relative">
+                        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+                        <button type="submit" style="display: block;border: 0;background-color: transparent">
+                            <span class="mdi mdi-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logOut"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+            <!-- Page-Title -->
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">预测</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/page/home">机器学习</a></li>
+                                <li class="breadcrumb-item active">房屋价格预测</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">请输入特征值</h4>
+                                    <form action="/page/pricePre" method="POST">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                        <div class="form-group row">
+                                            <!-- 城市（必填，提示无“市”字） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <input name="city" type="text" autocomplete="off"
+                                                           class="form-control"
+                                                           id="city" placeholder="请输入城市"
+                                                           required>
+                                                </div>
+                                            </div>
+                                            <!-- 物业类型（必填） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <select name="property_type" class="form-control"
+                                                            id="property_type" required>
+                                                        <option value="">请选择物业类型</option>
+                                                        <option value="住宅">住宅</option>
+                                                        <option value="公寓">公寓</option>
+                                                        <option value="商铺">商铺</option>
+                                                        <option value="写字楼">写字楼</option>
+                                                        <option value="别墅">别墅</option>
+                                                        <option value="其他">其他</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 建筑类型（必填，支持多类型拼接） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <select name="building_type" class="form-control"
+                                                            id="building_type" required>
+                                                        <option value="">请选择建筑类型</option>
+                                                        <option value="低层">低层</option>
+                                                        <option value="多层">多层</option>
+                                                        <option value="小高层">小高层</option>
+                                                        <option value="高层">高层</option>
+                                                        <option value="超高层">超高层</option>
+                                                        <option value="低层|多层">低层|多层</option>
+                                                        <option value="小高层|高层">小高层|高层</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 竣工时间（必填，提示格式） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <input name="completion_time" type="text" autocomplete="off"
+                                                           class="form-control" id="completion_time"
+                                                           placeholder="请输入竣工时间（如：2018年）" required>
+                                                </div>
+                                            </div>
+                                            <!-- 产权年限（必填，提示格式） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <input name="property_right_years" type="text" autocomplete="off"
+                                                           class="form-control" id="property_right_years"
+                                                           placeholder="请输入产权年限（如：70年）" required>
+                                                </div>
+                                            </div>
+                                            <!-- 物业费（必填，带单位） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="input-group">
+                                                    <input name="property_fee" type="number" step="0.01"
+                                                           autocomplete="off"
+                                                           class="form-control" id="property_fee"
+                                                           placeholder="请输入物业费" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">元/㎡·月</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 容积率（必填） -->
+                                            <div class="col-md-3 mb-3">
+                                                <input name="plot_ratio" type="number" step="0.01" autocomplete="off"
+                                                       class="form-control" id="plot_ratio"
+                                                       placeholder="请输入容积率" required>
+                                            </div>
+                                            <!-- 绿化率（必填，带单位） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="input-group">
+                                                    <input name="greening_rate" type="number" step="0.01"
+                                                           autocomplete="off"
+                                                           class="form-control" id="greening_rate"
+                                                           placeholder="请输入绿化率" required>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 集中供暖（必填） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <select name="unified_heating" class="form-control"
+                                                            id="unified_heating" required>
+                                                        <option value="">请选择是否集中供暖</option>
+                                                        <option value="是">是</option>
+                                                        <option value="否">否</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 水电气类型（必填） -->
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-group">
+                                                    <select name="water_supply_power" class="form-control"
+                                                            id="water_supply_power" required>
+                                                        <option value="">请选择水电气类型</option>
+                                                        <option value="民用">民用</option>
+                                                        <option value="商用">商用</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 提交按钮（占两列，居中） -->
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-primary btn-icon">
+                                                    <i class="bi bi-plus-circle"></i> 预测
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">预测结果</h4>
+                                    <div style="height: 150px; display: flex;justify-content: center;align-items: center;font-size: 35px;font-weight: bold"
+                                         id="main">
+                                        {% if errorMsg %}
+                                            <div class="alert alert-danger mt-3">{{ errorMsg }}</div>
+                                        {% endif %}
+                                        {% if priceResult >= 0 %}
+                                            <div class="alert alert-success mt-3">
+                                                随机森林预测：{{ rf_price_result }} 元/㎡
+                                            </div>
+                                            <div class="alert alert-success mt-3">
+                                                LightGBM预测：{{ lgbm_price_result }} 元/㎡
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2026 @ 蔡宣旭
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                房屋预测分析系统
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<!-- 1. 引入ECharts核心库 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 2. 引入ECharts词云扩展库 -->
+<script src="https://unpkg.com/echarts-wordcloud@2.0.0/dist/echarts-wordcloud.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/js/dataTables.buttons.min.js"></script>
+<script src="/static/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/js/jszip.min.js"></script>
+<script src="/static/js/buttons.html5.min.js"></script>
+<script src="/static/js/buttons.print.min.js"></script>
+<script src="/static/js/buttons.colVis.min.js"></script>
+<script src="/static/js/dataTables.responsive.min.js"></script>
+<script src="/static/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/js/datatables.init.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

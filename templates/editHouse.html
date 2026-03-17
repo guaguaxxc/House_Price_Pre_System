@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>修改数据</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesdesign" name="author">
+    <link href="/static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored">
+<div id="layout-wrapper">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box">
+                    <a href="/page/home" class="logo logo-dark" style="font-size: 20px;font-weight: bold">
+                        房屋数据分析预测系统
+                    </a>
+
+                    <a href="" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="/static/picture/logo-sm-light.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="/static/picture/logo-light.png" alt="" height="20">
+                                </span>
+                    </a>
+                </div>
+
+                <button class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                        id="vertical-menu-btn">
+                    <i class="mdi mdi-backburger"></i>
+                </button>
+
+                <!-- App Search-->
+                <form class="app-search d-none d-lg-block" method="GET" action="/page/tableData">
+                    <div class="position-relative">
+                        <input type="text" name="searchWord" class="form-control" placeholder="搜索...">
+                        <button type="submit" style="display: block;border: 0;background-color: transparent">
+                            <span class="mdi mdi-magnify"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-sm-inline-block ml-1">{{ username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/user/logOut"><i
+                                class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
+                            退出登录</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar="" class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">菜单</li>
+                    <li>
+                        <a href="/page/home" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/page/tableData" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-comment-message"></i></div>
+                            <span>统计</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">数据可视化</li>
+
+                    <li>
+                        <a href="/page/priceChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-sign-in-alt"></i></div>
+
+                            <span>房屋价格分析</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="/page/detailChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-grids"></i></div>
+                            <span>房屋详情分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/mapChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-layer-group"></i></div>
+                            <span>房屋地域分析</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/cloudChart" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-box"></i></div>
+                            <span>相关词云</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">机器学习</li>
+                    <li>
+                        <a href="/page/pricePre" class="waves-effect">
+                            <div class="d-inline-block icons-sm mr-1"><i class="uim uim-object-ungroup"></i></div>
+                            <span>房屋价格预测</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+            <!-- Page-Title -->
+            <div class="page-title-box">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title mb-1">修改房屋数据</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/page/home">首页</a></li>
+                                <li class="breadcrumb-item active">修改房屋数据</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title">房屋数据修改操作</h4>
+                                    <p class="card-title-desc">可自定义对房屋进行修改（按要求完成表单，即可正常修改）</p>
+                                    <form action="/page/editHouse?id={{ community_info.id if community_info else '' }}"
+                                          class="form-sample" method="POST">
+                                        <!-- 添加 CSRF token -->
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                                        <!-- 基础信息 -->
+                                        <div class="form-group">
+                                            <label for="city">城市 <span style="color:red">*</span></label>
+                                            <input name="city" type="text" autocomplete="off" class="form-control"
+                                                   id="city" placeholder="请输入城市（如：北京市）" required
+                                                   value="{{ community_info.city or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="community_name">小区名称 <span
+                                                    style="color:red">*</span></label>
+                                            <input name="community_name" type="text" autocomplete="off"
+                                                   class="form-control" id="community_name"
+                                                   placeholder="请输入小区全称（如：望京SOHO）" required
+                                                   value="{{ community_info.community_name or '' }}">
+                                        </div>
+                                        <!-- 价格（自动加 元/㎡） -->
+                                        <div class="form-group">
+                                            <label for="price">价格 <span style="color:red">*</span></label>
+                                            <div class="input-group">
+                                                <input name="price" type="number" step="0.01" autocomplete="off"
+                                                       class="form-control" id="price"
+                                                       placeholder="请输入价格（纯数字，单位：元/㎡）" required
+                                                       value="{{ community_info.price or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">元/㎡</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">地址</label>
+                                            <input name="address" type="text" autocomplete="off" class="form-control"
+                                                   id="address" placeholder="请输入详细地址"
+                                                   value="{{ community_info.address or '' }}">
+                                        </div>
+                                        <!-- 物业相关信息 -->
+                                        <div class="form-group">
+                                            <label for="property_type">物业类型</label>
+                                            <select name="property_type" class="form-control" id="property_type">
+                                                <option value="">请选择物业类型</option>
+                                                <option value="住宅"
+                                                        {% if community_info.property_type == '住宅' %}selected{% endif %}>
+                                                    住宅
+                                                </option>
+                                                <option value="公寓"
+                                                        {% if community_info.property_type == '公寓' %}selected{% endif %}>
+                                                    公寓
+                                                </option>
+                                                <option value="商铺"
+                                                        {% if community_info.property_type == '商铺' %}selected{% endif %}>
+                                                    商铺
+                                                </option>
+                                                <option value="写字楼"
+                                                        {% if community_info.property_type == '写字楼' %}selected{% endif %}>
+                                                    写字楼
+                                                </option>
+                                                <option value="别墅"
+                                                        {% if community_info.property_type == '别墅' %}selected{% endif %}>
+                                                    别墅
+                                                </option>
+                                                <option value="其他"
+                                                        {% if community_info.property_type == '其他' %}selected{% endif %}>
+                                                    其他
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ownership_type">权属类别</label>
+                                            <input name="ownership_type" type="text" autocomplete="off"
+                                                   class="form-control" id="ownership_type"
+                                                   placeholder="请输入权属类别（如：商品房、回迁房、经济适用房）"
+                                                   value="{{ community_info.ownership_type or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="completion_time">竣工时间</label>
+                                            <input name="completion_time" type="text" autocomplete="off"
+                                                   class="form-control" id="completion_time"
+                                                   placeholder="请输入竣工时间（如：2010年、2015-06）"
+                                                   value="{{ community_info.completion_time or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="property_right_years">产权年限</label>
+                                            <input name="property_right_years" type="text" autocomplete="off"
+                                                   class="form-control" id="property_right_years"
+                                                   placeholder="请输入产权年限（如：70年、40年）"
+                                                   value="{{ community_info.property_right_years or '' }}">
+                                        </div>
+                                        <!-- 小区规模信息 -->
+                                        <!-- 总户数（自动加 户） -->
+                                        <div class="form-group">
+                                            <label for="total_households">总户数</label>
+                                            <div class="input-group">
+                                                <input name="total_households" type="number" autocomplete="off"
+                                                       class="form-control" id="total_households"
+                                                       placeholder="请输入总户数（纯数字，单位：户）"
+                                                       value="{{ community_info.total_households or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">户</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 总建筑面积（自动加 ㎡） -->
+                                        <div class="form-group">
+                                            <label for="total_building_area">总建筑面积</label>
+                                            <div class="input-group">
+                                                <input name="total_building_area" type="number" step="0.01"
+                                                       autocomplete="off" class="form-control" id="total_building_area"
+                                                       placeholder="请输入总建筑面积（纯数字，单位：㎡）"
+                                                       value="{{ community_info.total_building_area or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">㎡</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 容积率（纯数字，无单位） -->
+                                        <div class="form-group">
+                                            <label for="plot_ratio">容积率</label>
+                                            <input name="plot_ratio" type="number" step="0.01" autocomplete="off"
+                                                   class="form-control" id="plot_ratio"
+                                                   placeholder="请输入容积率（纯数字）"
+                                                   value="{{ community_info.plot_ratio or '' }}">
+                                        </div>
+                                        <!-- 绿化率（自动加 %） -->
+                                        <div class="form-group">
+                                            <label for="greening_rate">绿化率</label>
+                                            <div class="input-group">
+                                                <input name="greening_rate" type="number" step="0.01" autocomplete="off"
+                                                       class="form-control" id="greening_rate"
+                                                       placeholder="请输入绿化率（纯数字，单位：%）"
+                                                       value="{{ community_info.greening_rate or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 建筑与配套信息 -->
+                                        <div class="form-group">
+                                            <label for="building_type">建筑类型</label>
+                                            <input name="building_type" type="text" autocomplete="off"
+                                                   class="form-control" id="building_type"
+                                                   placeholder="请输入建筑类型（如：板楼、塔楼、板塔结合）"
+                                                   value="{{ community_info.building_type or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="business_district">所属商圈</label>
+                                            <input name="business_district" type="text" autocomplete="off"
+                                                   class="form-control" id="business_district"
+                                                   placeholder="请输入所属商圈（如：望京商圈、中关村商圈）"
+                                                   value="{{ community_info.business_district or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="unified_heating">统一供暖</label>
+                                            <select name="unified_heating" class="form-control" id="unified_heating">
+                                                <option value="">请选择是否统一供暖</option>
+                                                <option value="是"
+                                                        {% if community_info.unified_heating == '是' %}selected{% endif %}>
+                                                    是
+                                                </option>
+                                                <option value="否"
+                                                        {% if community_info.unified_heating == '否' %}selected{% endif %}>
+                                                    否
+                                                </option>
+                                                <option value="自采暖"
+                                                        {% if community_info.unified_heating == '自采暖' %}selected{% endif %}>
+                                                    自采暖
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="water_supply_power">供水供电</label>
+                                            <select name="water_supply_power" class="form-control"
+                                                    id="water_supply_power">
+                                                <option value="">请选择供水供电</option>
+                                                <option value="民水民电"
+                                                        {% if community_info.water_supply_power == '民水民电' %}selected{% endif %}>
+                                                    民水民电
+                                                </option>
+                                                <option value="商水商电"
+                                                        {% if community_info.water_supply_power == '商水商电' %}selected{% endif %}>
+                                                    商水商电
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <!-- 停车与物业费用 -->
+                                        <div class="form-group">
+                                            <label for="parking_spaces">停车位</label>
+                                            <input name="parking_spaces" type="text" autocomplete="off"
+                                                   class="form-control" id="parking_spaces"
+                                                   placeholder="请输入停车位信息（如：1:1.2、地上车位500个）"
+                                                   value="{{ community_info.parking_spaces or '' }}">
+                                        </div>
+                                        <!-- 物业费（自动加 元/㎡·月） -->
+                                        <div class="form-group">
+                                            <label for="property_fee">物业费</label>
+                                            <div class="input-group">
+                                                <input name="property_fee" type="number" step="0.01" autocomplete="off"
+                                                       class="form-control" id="property_fee"
+                                                       placeholder="请输入物业费（纯数字，单位：元/㎡·月）"
+                                                       value="{{ community_info.property_fee or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">元/㎡·月</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 停车费（自动加 元/月） -->
+                                        <div class="form-group">
+                                            <label for="parking_fee">停车费</label>
+                                            <div class="input-group">
+                                                <input name="parking_fee" type="number" step="0.01" autocomplete="off"
+                                                       class="form-control" id="parking_fee"
+                                                       placeholder="请输入停车费（纯数字，单位：元/月）"
+                                                       value="{{ community_info.parking_fee or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">元/月</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 车位管理费（自动加 元/月） -->
+                                        <div class="form-group">
+                                            <label for="parking_management_fee">车位管理费</label>
+                                            <div class="input-group">
+                                                <input name="parking_management_fee" type="number" step="0.01"
+                                                       autocomplete="off" class="form-control"
+                                                       id="parking_management_fee"
+                                                       placeholder="请输入车位管理费（纯数字，单位：元/月）"
+                                                       value="{{ community_info.parking_management_fee or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">元/月</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 其他信息 -->
+                                        <div class="form-group">
+                                            <label for="property_company">物业公司</label>
+                                            <input name="property_company" type="text" autocomplete="off"
+                                                   class="form-control" id="property_company"
+                                                   placeholder="请输入物业公司名称"
+                                                   value="{{ community_info.property_company or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="community_address">小区地址</label>
+                                            <input name="community_address" type="text" autocomplete="off"
+                                                   class="form-control" id="community_address"
+                                                   placeholder="请输入小区具体地址"
+                                                   value="{{ community_info.community_address or '' }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="developer">开发商</label>
+                                            <input name="developer" type="text" autocomplete="off" class="form-control"
+                                                   id="developer" placeholder="请输入开发商名称"
+                                                   value="{{ community_info.developer or '' }}">
+                                        </div>
+                                        <!-- 在售房源（自动加 套） -->
+                                        <div class="form-group">
+                                            <label for="sale_houses">在售房源</label>
+                                            <div class="input-group">
+                                                <input name="sale_houses" type="number" autocomplete="off"
+                                                       class="form-control" id="sale_houses"
+                                                       placeholder="请输入在售房源数量（纯数字，单位：套）"
+                                                       value="{{ community_info.sale_houses or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">套</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 在租房源（自动加 套） -->
+                                        <div class="form-group">
+                                            <label for="rent_houses">在租房源</label>
+                                            <div class="input-group">
+                                                <input name="rent_houses" type="number" autocomplete="off"
+                                                       class="form-control" id="rent_houses"
+                                                       placeholder="请输入在租房源数量（纯数字，单位：套）"
+                                                       value="{{ community_info.rent_houses or '' }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">套</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 提交按钮 -->
+                                        <button type="submit" class="btn btn-primary">更新小区信息</button>
+                                        <button type="reset" class="btn btn-default ml-2">重置表单</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        2026 @ 蔡宣旭
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            房屋预测分析系统
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/metisMenu.min.js"></script>
+<script src="/static/js/simplebar.min.js"></script>
+<script src="/static/js/waves.min.js"></script>
+<script src="/static/js/bundle.js"></script>
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/js/dataTables.buttons.min.js"></script>
+<script src="/static/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/js/jszip.min.js"></script>
+<script src="/static/js/buttons.html5.min.js"></script>
+<script src="/static/js/buttons.print.min.js"></script>
+<script src="/static/js/buttons.colVis.min.js"></script>
+<script src="/static/js/dataTables.responsive.min.js"></script>
+<script src="/static/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/js/datatables.init.js"></script>
+<script src="/static/js/app.js"></script>
+
+</body>
+</html>
